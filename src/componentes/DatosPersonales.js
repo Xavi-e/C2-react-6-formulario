@@ -1,4 +1,7 @@
-export const DatosPersonales = () => {
+import PropTypes from "prop-types";
+
+export const DatosPersonales = (props) => {
+    const { avanzaPaso, datosPersonales } = props;
 
     return (
         <div className="col-7 justify-content-center">
@@ -37,10 +40,21 @@ export const DatosPersonales = () => {
                 </div>
                 <div className="col-12 botones">
                     <span className="d-flex flex-row justify-content-end">
-                        <button type="button" className="btn btn-dark btn-sm ">Siguiente</button>
+                        <button type="button" className="btn btn-dark btn-sm"
+                            onClick={avanzaPaso}>Siguiente</button>
                     </span>
                 </div>
             </form>
         </div>
     );
+};
+
+DatosPersonales.propTypes = {
+    avanzaPaso: PropTypes.func.isRequired,
+    datosPersonales: PropTypes.shape({
+        nombre: PropTypes.string.isRequired,
+        apellidos: PropTypes.string.isRequired,
+        fechaNacimiento: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+    }).isRequired
 };

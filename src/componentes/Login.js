@@ -1,4 +1,9 @@
-export const Login = () => {
+import PropTypes from "prop-types";
+
+export const Login = (props) => {
+
+    const { datosAcceso, avanzaPaso, retrocedePaso } = props;
+
 
     return (
         <div className="col-7 justify-content-center">
@@ -34,11 +39,23 @@ export const Login = () => {
                 <div className="col-12 botones">
 
                     <span className="d-flex flex-row justify-content-between">
-                        <button type="button" className="btn btn-dark btn-sm ">Anterior</button>
-                        <button type="submit" className="btn btn-dark btn-sm ">Enviar</button>
+                        <button type="button" className="btn btn-dark btn-sm "
+                            onClick={retrocedePaso}>Anterior</button>
+                        <button type="submit" className="btn btn-dark btn-sm "
+                            onClick={avanzaPaso}>Enviar</button>
                     </span>
                 </div>
             </form>
         </div>
     );
+};
+
+Login.propTypes = {
+    avanzaPaso: PropTypes.func.isRequired,
+    datosAcceso: PropTypes.shape({
+        usuario: PropTypes.string.isRequired,
+        contraseña: PropTypes.string.isRequired,
+        recordarContraseña: PropTypes.bool.isRequired,
+
+    }).isRequired,
 };

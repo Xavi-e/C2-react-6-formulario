@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { DatosAcceso } from './componentes/DatosAcceso';
+import { DatosRegistro } from './componentes/DatosRegistro';
 import { DatosPersonales } from './componentes/DatosPersonales';
 import { Login } from './componentes/Login';
+import { Resumen } from './componentes/Resumen';
 
 function App() {
   const [paso, setPaso] = useState(1);
@@ -11,16 +12,17 @@ function App() {
     fechaNacimiento: "",
     email: "",
   });
-  const [datosAcceso, setDatosAcceso] = useState({
-    usuario: "",
-    contraseña: "",
-    recordarContrasseña: true,
-  });
   const [datosRegistro, setDatosRegistro] = useState({
     usuario: "",
     contraseña: "",
     repiteContraseña: "",
   });
+  const [datosAcceso, setDatosAcceso] = useState({
+    usuario: "",
+    contraseña: "",
+    recordarContrasseña: true,
+  });
+
 
   const avanzaPaso = () => {
     if (paso === 4) {
@@ -39,9 +41,26 @@ function App() {
         <h1 className="titulo">FORMULARIO</h1>
       </header>
       <div className="row justify-content-center align-items-center ">
-        <DatosPersonales />
-        <DatosAcceso />
-        <Login />
+        {paso === 1 && (
+          <DatosPersonales
+            avanzaPaso={avanzaPaso}
+            datosPersonales={datosPersonales}
+          />
+        )}
+        {paso === 2 && (
+          <DatosRegistro
+            avanzaPaso={avanzaPaso}
+            datosRegistro={datosRegistro}
+            retrocedePaso={retrocedePaso}
+          />
+        )}
+        {paso === 3 && (
+          <Login
+            avanzaPaso={avanzaPaso}
+            datosAcceso={datosAcceso}
+            retrocedePaso={retrocedePaso} />
+        )}
+        {paso === 4 && <Resumen retrocedePaso={retrocedePaso} />}
       </div>
 
     </>

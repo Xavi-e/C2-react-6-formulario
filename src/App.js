@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { DatosAcceso } from './componentes/DatosAcceso';
+import { DatosPersonales } from './componentes/DatosPersonales';
+import { Login } from './componentes/Login';
 
 function App() {
+  const [paso, setPaso] = useState(1);
+  const [datosPersonales, setDatosPersonales] = useState({
+    nombre: "",
+    apellidos: "",
+    fechaNacimiento: "",
+    email: "",
+  });
+  const [datosAcceso, setDatosAcceso] = useState({
+    usuario: "",
+    contraseña: "",
+    recordarContrasseña: true,
+  });
+  const [datosRegistro, setDatosRegistro] = useState({
+    usuario: "",
+    contraseña: "",
+    repiteContraseña: "",
+  });
+
+  const avanzaPaso = () => {
+    if (paso === 4) {
+      return;
+    } setPaso(paso + 1);
+  };
+
+  const retrocedePaso = () => {
+    if (paso === 1) {
+      return;
+    } setPaso(paso - 1);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1 className="titulo">FORMULARIO</h1>
       </header>
-    </div>
-  );
+      <div className="row justify-content-center align-items-center ">
+        <DatosPersonales />
+        <DatosAcceso />
+        <Login />
+      </div>
+
+    </>
+
+  )
 }
 
 export default App;
